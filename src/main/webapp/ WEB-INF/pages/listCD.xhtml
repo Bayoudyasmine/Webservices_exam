@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Liste des CDs disponibles</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:outputLabel for="utilisateur" value="Nom d'utilisateur: "/>
+        <h:inputText id="utilisateur" value="#{utilisateurBean.utilisateur}" required="true">
+            <f:validateLength minimum="3" maximum="30"/>
+        </h:inputText>
+        <h:message for="utilisateur" style="color:red"/>
+
+        <h:dataTable value="#{utilisateurBean.cdDisponibles}" var="cd">
+            <h:column>
+                <f:facet name="header">Titre</f:facet>
+                #{cd.titre}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Artiste</f:facet>
+                #{cd.artiste}
+            </h:column>
+            <h:column>
+                <h:commandButton value="Emprunter" action="#{utilisateurBean.emprunterCD(cd.id)}"/>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>
